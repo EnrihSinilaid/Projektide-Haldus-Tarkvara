@@ -6,13 +6,16 @@ import java.util.List;
 public class Projekt {
     private String projektiNimi;
     private String tahtaeg;
+    private String haldur;
     private List<Toode> tooted = new ArrayList();
     private List<Tootaja> tootajad = new ArrayList();
     private List<Logi> logid = new ArrayList();
 
-    public Projekt(String projektiNimi, String tahtaeg) {
+    public Projekt(String projektiNimi, String tahtaeg, String haldur) {
         this.projektiNimi = projektiNimi;
         this.tahtaeg = tahtaeg;
+        this.haldur = haldur;
+
     }
 
     public String getProjektiNimi() {
@@ -57,6 +60,22 @@ public class Projekt {
 
     public void setLogid(List<Logi> logid) {
         this.logid = logid;
+    }
+
+    public void setProjektiNimi(String projektiNimi) {
+        this.projektiNimi = projektiNimi;
+    }
+
+    public void setTahtaeg(String tahtaeg) {
+        this.tahtaeg = tahtaeg;
+    }
+
+    public String getHaldur() {
+        return haldur;
+    }
+
+    public void setHaldur(String haldur) {
+        this.haldur = haldur;
     }
 
     public String toString() {

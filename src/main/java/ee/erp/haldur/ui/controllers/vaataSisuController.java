@@ -13,6 +13,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseButton;
@@ -50,7 +51,16 @@ public class vaataSisuController implements Initializable {
             }
 
         });
+        this.TabLogid.setOnMouseClicked((event) -> {
+            if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 1) {
+                String[] logi = new String[]{this.TabLogid.getSelectionModel().getSelectedItem().getLogi(), this.TabLogid.getSelectionModel().getSelectedItem().getKuupaev()};
+                this.kuvaLogi(logi);
+            }
+
+        });
     }
+
+
 
     @FXML
     public void populeeriProjektid() {
@@ -95,6 +105,11 @@ public class vaataSisuController implements Initializable {
     public void taidaTunnid(List<Tund> tund) {
         this.TabTunnid.setItems(FXCollections.observableArrayList(tund));
         this.TabTunnid.refresh();
+    }
+
+    private void kuvaLogi(String[] logi) {
+        Dialoog kuva = new Dialoog(Alert.AlertType.INFORMATION);
+        kuva.MakeDialog(Alert.AlertType.INFORMATION, "Logi", "Logi esitatud: " + logi[1], logi[0]);
     }
 }
 
