@@ -2,20 +2,9 @@
 
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TitledPane?>
-<?import javafx.scene.control.cell.PropertyValueFactory?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="600" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
    <children>
@@ -62,7 +51,7 @@
                                         <PropertyValueFactory property="kood" />
                                     </cellValueFactory>
                                     </TableColumn>
-                                  <TableColumn fx:id="TKogus" minWidth="8.0" prefWidth="75.0" text="Kogus" >
+                                  <TableColumn fx:id="TKogus" minWidth="8.0" prefWidth="75.0" text="Kogus">
                                     <cellValueFactory>
                                         <PropertyValueFactory property="kogus" />
                                     </cellValueFactory>
@@ -72,12 +61,12 @@
                                             <PropertyValueFactory property="saabumiseKuupaev" />
                                         </cellValueFactory>
                                     </TableColumn>
-                                    <TableColumn fx:id="TKohal" prefWidth="195.0" text="Kohal" >
+                                    <TableColumn fx:id="TKohal" prefWidth="195.0" text="Kohal">
                                         <cellValueFactory>
                                             <PropertyValueFactory property="kohal" />
                                         </cellValueFactory>
                                     </TableColumn>
-                                    <TableColumn fx:id="THind" prefWidth="131.0" text="Hind" >
+                                    <TableColumn fx:id="THind" prefWidth="131.0" text="Hind">
                                         <cellValueFactory>
                                             <PropertyValueFactory property="hind" />
                                         </cellValueFactory>
@@ -93,11 +82,16 @@
                                        <children>
                                           <TableView fx:id="TabTootajad" layoutX="-12.0" layoutY="-9.0" prefHeight="181.0" prefWidth="794.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                             <columns>
-                                              <TableColumn fx:id="TTootajad" prefWidth="793.0" text="Töötajad" >
+                                              <TableColumn fx:id="TTootajad" prefWidth="638.0" text="Töötajad">
                                                   <cellValueFactory>
                                                       <PropertyValueFactory property="nimi" />
                                                   </cellValueFactory>
                                               </TableColumn>
+                                                <TableColumn fx:id="TTunnidKokku" prefWidth="155.0" text="Töötunnid kokku" >
+                                                    <cellValueFactory>
+                                                        <PropertyValueFactory property="kokku" />
+                                                    </cellValueFactory>
+                                                </TableColumn>
                                             </columns>
                                           </TableView>
                                        </children>
@@ -110,12 +104,12 @@
                                                    <children>
                                                       <TableView fx:id="TabTunnid" prefHeight="87.0" prefWidth="792.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                         <columns>
-                                                          <TableColumn fx:id="TTunnid" prefWidth="418.0" text="Töötunnid" >
+                                                          <TableColumn fx:id="TTunnid" prefWidth="418.0" text="Töötunnid">
                                                               <cellValueFactory>
                                                                   <PropertyValueFactory property="tund" />
                                                               </cellValueFactory>
                                                           </TableColumn>
-                                                          <TableColumn fx:id="TTooKuupäev" minWidth="0.0" prefWidth="373.0" text="Töö kuupäev" >
+                                                          <TableColumn fx:id="TTooKuupäev" minWidth="0.0" prefWidth="373.0" text="Töö kuupäev">
                                                               <cellValueFactory>
                                                                   <PropertyValueFactory property="kuupaev" />
                                                               </cellValueFactory>
@@ -128,12 +122,12 @@
                                                    <children>
                                                       <TableView fx:id="TabLogid" prefHeight="181.0" prefWidth="794.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                         <columns>
-                                                          <TableColumn fx:id="TLogi" prefWidth="560.0" text="Logi" >
+                                                          <TableColumn fx:id="TLogi" prefWidth="560.0" text="Logi">
                                                               <cellValueFactory>
                                                                   <PropertyValueFactory property="logi" />
                                                               </cellValueFactory>
                                                           </TableColumn>
-                                                          <TableColumn fx:id="TLogiKuupäev" minWidth="0.0" prefWidth="231.0" text="Logi kuupäev" >
+                                                          <TableColumn fx:id="TLogiKuupäev" minWidth="0.0" prefWidth="231.0" text="Logi kuupäev">
                                                               <cellValueFactory>
                                                                   <PropertyValueFactory property="kuupaev" />
                                                               </cellValueFactory>

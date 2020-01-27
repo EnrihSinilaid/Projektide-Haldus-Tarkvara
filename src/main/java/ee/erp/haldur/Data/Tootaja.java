@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Tootaja {
     private String nimi;
+    private int kokku;
     private List<Tund> tund = new ArrayList();
 
     public Tootaja(String nimi) {
@@ -30,6 +31,14 @@ public class Tootaja {
 
     public void addTunnid(Tund tund) {
         this.tund.add(tund);
+    }
+
+    public int getKokku() {
+        int kokku = 0;
+        for (Tund obj : tund) {
+            kokku += obj.getTund();
+        }
+        return kokku;
     }
 }
 
