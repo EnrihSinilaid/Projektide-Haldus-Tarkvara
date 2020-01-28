@@ -1,5 +1,6 @@
 package ee.erp.haldur.ui.controllers;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -67,11 +68,12 @@ public class uusProjectController implements Initializable {
     }
 
     @FXML
-    protected void salvestaButtonClicked() {
+    protected void salvestaButtonClicked() throws IOException {
         Projekt uusProjekt = new Projekt(this.nimiField.getText(), this.tahtaegField.getText(), this.haldurField.getText());
         this.dao.getProjektid().add(uusProjekt);
         this.resetFields(0);
         this.disableFields(0);
+        this.dao.salvesta();
     }
 
     @FXML
@@ -81,13 +83,14 @@ public class uusProjectController implements Initializable {
     }
 
     @FXML
-    protected void muudaProjektiButtonClicked() {
+    protected void muudaProjektiButtonClicked() throws IOException {
         Projekt valitud = this.valitudProjekt();
         valitud.setProjektiNimi(nimiMField.getText());
         valitud.setTahtaeg(tahtaegMField.getText());
         valitud.setHaldur(haldurMField.getText());
         this.resetFields(1);
         this.disableFields(1);
+        this.dao.salvesta();
     }
 
     @FXML

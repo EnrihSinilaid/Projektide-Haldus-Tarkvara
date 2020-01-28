@@ -5,7 +5,7 @@ plugins {
 }
 
 group 'enrih.projects'
-version '1.2-SNAPSHOT'
+version '1.2.3'
 
 sourceCompatibility = 1.8
 

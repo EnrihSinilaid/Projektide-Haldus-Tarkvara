@@ -40,7 +40,7 @@ public class projektideHaldusDAO {
             Projekt obj = (Projekt)var3.next();
             JSONObject projekt = new JSONObject();
             projekt.put("Projekt", obj.getProjektiNimi());
-            projekt.put("Tähtaeg", obj.getTahtaeg());
+            projekt.put("Tahtaeg", obj.getTahtaeg());
             projekt.put("Haldur", obj.getHaldur());
             JSONObject tooted = new JSONObject();
             int tooteLoendur = 0;
@@ -51,7 +51,7 @@ public class projektideHaldusDAO {
                 JSONObject toode = new JSONObject();
                 toode.put("Kood", jupp.getKood());
                 toode.put("Kogus", String.valueOf(jupp.getKogus()));
-                toode.put("Kuupäev", jupp.getSaabumiseKuupaev());
+                toode.put("Kuupaev", jupp.getSaabumiseKuupaev());
                 toode.put("Kohal", jupp.getKohal());
                 toode.put("Hind", String.valueOf(jupp.getHind()));
                 tooted.put(String.valueOf(tooteLoendur++), toode);
@@ -72,16 +72,16 @@ public class projektideHaldusDAO {
                     Tund tund = (Tund)var14.next();
                     JSONObject abiTund = new JSONObject();
                     abiTund.put("Tehtud tunnid", String.valueOf(tund.getTund()));
-                    abiTund.put("Kuupäev", tund.getKuupaev());
+                    abiTund.put("Kuupaev", tund.getKuupaev());
                     tunnid.put(String.valueOf(tootajaLoendur++), abiTund);
                 }
 
-                tootaja.put("Töötaja", jupp.getNimi());
+                tootaja.put("Tootaja", jupp.getNimi());
                 tootaja.put("Tunnid", tunnid);
                 tootajad.add(tootaja);
             }
 
-            projekt.put("Töötajad", tootajad);
+            projekt.put("Tootajad", tootajad);
             JSONObject logid = new JSONObject();
             int logiLoendur = 0;
             Iterator var22 = obj.getLogid().iterator();
@@ -90,7 +90,7 @@ public class projektideHaldusDAO {
                 Logi jupp = (Logi)var22.next();
                 JSONObject log = new JSONObject();
                 log.put("Logi", jupp.getLogi());
-                log.put("Kuupäev", jupp.getKuupaev());
+                log.put("Kuupaev", jupp.getKuupaev());
                 logid.put(String.valueOf(logiLoendur++), log);
             }
 
@@ -113,17 +113,17 @@ public class projektideHaldusDAO {
 
             for(int i = 0; i < andmed.size(); ++i) {
                 JSONObject projekt = (JSONObject)andmed.get(String.valueOf(i));
-                JSONArray tootajad = (JSONArray)projekt.get("Töötajad");
+                JSONArray tootajad = (JSONArray)projekt.get("Tootajad");
                 JSONObject tooted = (JSONObject)projekt.get("Tooted");
                 JSONObject logid = (JSONObject)projekt.get("Logid");
                 System.out.println(tootajad);
-                Projekt uusProjekt = new Projekt(projekt.get("Projekt").toString(), projekt.get("Tähtaeg").toString(), projekt.get("Haldur").toString());
+                Projekt uusProjekt = new Projekt(projekt.get("Projekt").toString(), projekt.get("Tahtaeg").toString(), projekt.get("Haldur").toString());
                 List<Toode> uusTooted = uusProjekt.getTooted();
 
                 for(int j = 0; j < tooted.size(); ++j) {
                     JSONObject toode = (JSONObject)tooted.get(String.valueOf(j));
                     Toode lisa = new Toode(toode.get("Kood").toString(), Integer.parseInt(toode.get("Kogus").toString())
-                            , toode.get("Kuupäev").toString(), toode.get("Kohal").toString()
+                            , toode.get("Kuupaev").toString(), toode.get("Kohal").toString()
                             , Double.parseDouble(toode.get("Hind").toString()));
                     uusTooted.add(lisa);
                 }
@@ -139,11 +139,11 @@ public class projektideHaldusDAO {
 
                     for(int k = 0; k < logi.size(); ++k) {
                         JSONObject tund = (JSONObject)logi.get(String.valueOf(k));
-                        Tund lisa = new Tund(Integer.parseInt(tund.get("Tehtud tunnid").toString()), tund.get("Kuupäev").toString());
+                        Tund lisa = new Tund(Integer.parseInt(tund.get("Tehtud tunnid").toString()), tund.get("Kuupaev").toString());
                         lisaTund.add(lisa);
                     }
 
-                    Tootaja lisa = new Tootaja(tootaja.get("Töötaja").toString(), lisaTund);
+                    Tootaja lisa = new Tootaja(tootaja.get("Tootaja").toString(), lisaTund);
                     uusTootajad.add(lisa);
                 }
 
@@ -152,7 +152,7 @@ public class projektideHaldusDAO {
 
                 for(int j = 0; j < logid.size(); ++j) {
                     logi = (JSONObject)logid.get(String.valueOf(j));
-                    Logi lisa = new Logi(logi.get("Logi").toString(), logi.get("Kuupäev").toString());
+                    Logi lisa = new Logi(logi.get("Logi").toString(), logi.get("Kuupaev").toString());
                     uusLogid.add(lisa);
                 }
 
