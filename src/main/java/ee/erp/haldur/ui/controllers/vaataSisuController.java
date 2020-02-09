@@ -77,35 +77,6 @@ public class vaataSisuController implements Initializable {
             }
         });
 
-        TEemaldaHind.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
-        TEemaldaHind.setCellFactory(param -> new TableCell<Toode, Toode>() {
-            private final Button deleteButton2 = new Button("X");
-
-            @Override
-            protected void updateItem(Toode toode, boolean empty) {
-                super.updateItem(toode, empty);
-
-                if (toode == null) {
-                    setGraphic(null);
-                    return;
-                }
-
-                valitudProjekt = valitudProjekt();
-
-                setGraphic(deleteButton2);
-                deleteButton2.setOnAction(event -> {
-                    valitudProjekt.getTooted().remove(toode);
-                    taidaTooted(valitudProjekt.getTooted());
-                    TabTooted.refresh();
-                    try {
-                        dao.salvesta();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                });
-            }
-        });
-
         this.ProjektiValija.showingProperty().addListener((observable, wasShowing, isNowShowing) -> {
             this.populeeriProjektid();
         });
@@ -130,9 +101,6 @@ public class vaataSisuController implements Initializable {
 
         });
     }
-
-
-
 
     @FXML
     public void populeeriProjektid() {
