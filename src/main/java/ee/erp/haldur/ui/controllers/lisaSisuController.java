@@ -217,43 +217,67 @@ public class lisaSisuController implements Initializable {
 
     @FXML
     public void lisaToodeButtonClicked() {
-        Projekt valitud = this.valitudProjekt();
-        valitud.addToode(new Toode(this.tooteKoodLText.getText(), Integer.parseInt(this.kogusLText.getText())
-                                    , this.kohalLText.getText()
-                                    , this.saabumineLText.getText()
-                                    , this.makseTahtaegLText.getText()
-                                    , this.makstudLText.getText()
-                                    , Double.parseDouble(this.hindLText.getText())));
+        if(valitudProjekt() != null) {
+            Projekt valitud = this.valitudProjekt();
+            if(!this.tooteKoodLText.getText().replace(" ", "").isEmpty() ||
+                    !this.tooteKoodLText.getText().replace(" ", "").isEmpty() ||
+                    !this.kogusLText.getText().replace(" ", "").isEmpty() ||
+                    !this.kohalLText.getText().replace(" ", "").isEmpty() ||
+                    !this.saabumineLText.getText().replace(" ", "").isEmpty() ||
+                    !this.makseTahtaegLText.getText().replace(" ", "").isEmpty() ||
+                    !this.makstudLText.getText().replace(" ", "").isEmpty() ||
+                    !this.hindLText.getText().replace(" ", "").isEmpty()) {
 
-        lisaToodetValjadReset();
+                valitud.addToode(new Toode(this.tooteKoodLText.getText(), Integer.parseInt(this.kogusLText.getText())
+                        , this.kohalLText.getText()
+                        , this.saabumineLText.getText()
+                        , this.makseTahtaegLText.getText()
+                        , this.makstudLText.getText()
+                        , Double.parseDouble(this.hindLText.getText())));
 
-        try {
-            this.dao.salvesta();
-        } catch (IOException var3) {
-            var3.printStackTrace();
-        }
+                lisaToodetValjadReset();
 
-    }
-
-    @FXML
-    public void muudaToodeButtonClicked() {
-        if(valitudToode() != null) {
-            Toode valitudToode = this.valitudToode();
-            valitudToode.setKood(this.tooteKoodMText.getText());
-            valitudToode.setKogus(Integer.parseInt(this.kogusMText.getText()));
-            valitudToode.setSaabumiseKuupaev(this.saabumineMText.getText());
-            valitudToode.setKohal(this.kohalMText.getText());
-            valitudToode.setHind(Double.parseDouble(this.hindMText.getText()));
-            muudaToodetValjadReset();
-            try {
-                this.dao.salvesta();
-            } catch (IOException var3) {
-                var3.printStackTrace();
+                try {
+                    this.dao.salvesta();
+                } catch (IOException var3) {
+                    var3.printStackTrace();
+                }
+            }
+            else{
+                Dialoog alert = new Dialoog(Alert.AlertType.ERROR);
+                alert.MakeDialog("Veateade!", "Viga toote lisamisel!", "Viga esines, kõik väljad ei ole täidetud. Täitke kõik väljad ja proovige uuesti.");
             }
         }
         else{
             Dialoog alert = new Dialoog(Alert.AlertType.ERROR);
-            alert.MakeDialog("Veateade!", "Viga toote muutmisel", "Viga esines, sest toode on valimata. Valige toode ja proovige uuest.");
+            alert.MakeDialog("Veateade!", "Viga toote lisamisel!", "Viga esines, sest projekt on valimata. Valige projekt ja proovige uuest.");
+        }
+    }
+
+    @FXML
+    public void muudaToodeButtonClicked() {
+        if(valitudProjekt() != null) {
+            if (valitudToode() != null) {
+                Toode valitudToode = this.valitudToode();
+                valitudToode.setKood(this.tooteKoodMText.getText());
+                valitudToode.setKogus(Integer.parseInt(this.kogusMText.getText()));
+                valitudToode.setSaabumiseKuupaev(this.saabumineMText.getText());
+                valitudToode.setKohal(this.kohalMText.getText());
+                valitudToode.setHind(Double.parseDouble(this.hindMText.getText()));
+                muudaToodetValjadReset();
+                try {
+                    this.dao.salvesta();
+                } catch (IOException var3) {
+                    var3.printStackTrace();
+                }
+            } else {
+                Dialoog alert = new Dialoog(Alert.AlertType.ERROR);
+                alert.MakeDialog("Veateade!", "Viga toote muutmisel", "Viga esines, sest toode on valimata. Valige toode ja proovige uuest.");
+            }
+        }
+        else{
+            Dialoog alert = new Dialoog(Alert.AlertType.ERROR);
+            alert.MakeDialog("Veateade!", "Viga toote muutmisel!", "Viga esines, sest projekt on valimata. Valige projekt ja proovige uuest.");
         }
     }
 
@@ -282,30 +306,53 @@ public class lisaSisuController implements Initializable {
 
     @FXML
     public void lisaTunnidButtonClicked() {
-        Tootaja valitud = this.valitudTootaja();
-        valitud.addTunnid(new Tund(Integer.parseInt(this.tooTunnidText.getText()), this.tooKuupaevText.getText()));
-        this.tooTunnidText.setText("");
-        this.tooKuupaevText.setText("");
+        if(valitudProjekt() != null) {
+            Tootaja valitud = this.valitudTootaja();
+            if(!this.tooTunnidText.getText().replace(" ", "").isEmpty() ||
+                    !this.tooKuupaevText.getText().replace(" ", "").isEmpty()) {
+                valitud.addTunnid(new Tund(Integer.parseInt(this.tooTunnidText.getText()), this.tooKuupaevText.getText()));
+                this.tooTunnidText.setText("");
+                this.tooKuupaevText.setText("");
 
-        try {
-            this.dao.salvesta();
-        } catch (IOException var3) {
-            var3.printStackTrace();
+                try {
+                    this.dao.salvesta();
+                } catch (IOException var3) {
+                    var3.printStackTrace();
+                }
+            }
+            else{
+                Dialoog alert = new Dialoog(Alert.AlertType.ERROR);
+                alert.MakeDialog("Veateade!", "Viga tunni lisamisel!", "Viga esines, sest tunnid ja/voi kuupäev puudus. Sisestage väljadele korrektsed andmed ja proovige uuesti.");
+            }
         }
-
+        else{
+            Dialoog alert = new Dialoog(Alert.AlertType.ERROR);
+            alert.MakeDialog("Veateade!", "Viga tunni lisamisel!", "Viga esines, sest projekt on valimata. Valige projekt ja proovige uuest.");
+        }
     }
 
     @FXML
     public void lisaLogiButtonClicked() {
-        Projekt valitud = this.valitudProjekt();
-        valitud.addLogi(new Logi(this.logiText.getText()));
-        this.logiText.setText("");
+        if(valitudProjekt() != null) {
+            Projekt valitud = this.valitudProjekt();
+            if (!this.logiText.getText().replace(" ", "").isEmpty()) {
+                valitud.addLogi(new Logi(this.logiText.getText()));
+                this.logiText.setText("");
 
-        try {
-            this.dao.salvesta();
-        } catch (IOException var3) {
-            var3.printStackTrace();
+                try {
+                    this.dao.salvesta();
+                } catch (IOException var3) {
+                    var3.printStackTrace();
+                }
+            }
+            else{
+                Dialoog alert = new Dialoog(Alert.AlertType.ERROR);
+                alert.MakeDialog("Veateade!", "Viga logi lisamisel!", "Viga esines, sest sisestatud logi sisu puudus. Sisestage korrektne logi ja proovige uuesti.");
+            }
         }
-
+        else{
+            Dialoog alert = new Dialoog(Alert.AlertType.ERROR);
+            alert.MakeDialog("Veateade!", "Viga logi lisamisel!", "Viga esines, sest projekt on valimata. Valige projekt ja proovige uuest.");
+        }
     }
 }
