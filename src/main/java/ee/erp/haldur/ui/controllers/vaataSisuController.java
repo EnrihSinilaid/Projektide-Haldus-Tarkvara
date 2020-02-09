@@ -1,5 +1,6 @@
 package ee.erp.haldur.ui.controllers;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -8,14 +9,15 @@ import java.util.ResourceBundle;
 
 import ee.erp.haldur.DAO.projektideHaldusDAO;
 import ee.erp.haldur.Data.*;
+import ee.erp.haldur.ui.controllers.helper.ActionButtonTableCell;
+import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 
 public class vaataSisuController implements Initializable {
@@ -30,12 +32,80 @@ public class vaataSisuController implements Initializable {
     private TableView<Tund> TabTunnid;
     @FXML
     private TableView<Logi> TabLogid;
+    @FXML
+    private TableColumn<Tund, Tund> TEemalda = new TableColumn<>("Eemalda");
+    @FXML
+    private TableColumn<Toode, Toode> TEemaldaHind = new TableColumn<>("Eemalda");
+
+    List<Tund> tunnid = new ArrayList<>();
+    Tootaja valitudTootaja;
+    Projekt valitudProjekt;
 
     public vaataSisuController(projektideHaldusDAO dao) {
         this.dao = dao;
     }
 
     public void initialize(URL location, ResourceBundle resources) {
+
+        TEemalda.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
+        TEemalda.setCellFactory(param -> new TableCell<Tund, Tund>(){
+            private final Button deleteButton1 = new Button("X");
+
+            @Override
+            protected void updateItem(Tund tund, boolean empty) {
+                super.updateItem(tund, empty);
+
+                if (tund == null) {
+                    setGraphic(null);
+                    return;
+                }
+
+                valitudProjekt = valitudProjekt();
+
+                setGraphic(deleteButton1);
+                deleteButton1.setOnAction(event -> {
+                    valitudTootaja.getTund().remove(tund);
+                    taidaTunnid(valitudTootaja.getTund());
+                    TabTootajad.refresh();
+                    try {
+                        dao.salvesta();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
+
+            }
+        });
+
+        TEemaldaHind.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
+        TEemaldaHind.setCellFactory(param -> new TableCell<Toode, Toode>() {
+            private final Button deleteButton2 = new Button("X");
+
+            @Override
+            protected void updateItem(Toode toode, boolean empty) {
+                super.updateItem(toode, empty);
+
+                if (toode == null) {
+                    setGraphic(null);
+                    return;
+                }
+
+                valitudProjekt = valitudProjekt();
+
+                setGraphic(deleteButton2);
+                deleteButton2.setOnAction(event -> {
+                    valitudProjekt.getTooted().remove(toode);
+                    taidaTooted(valitudProjekt.getTooted());
+                    TabTooted.refresh();
+                    try {
+                        dao.salvesta();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
+            }
+        });
+
         this.ProjektiValija.showingProperty().addListener((observable, wasShowing, isNowShowing) -> {
             this.populeeriProjektid();
         });
@@ -46,8 +116,9 @@ public class vaataSisuController implements Initializable {
         });
         this.TabTootajad.setOnMouseClicked((event) -> {
             if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 1) {
-                List<Tund> tund = ((Tootaja)this.TabTootajad.getSelectionModel().getSelectedItem()).getTund();
-                this.taidaTunnid(tund);
+                valitudTootaja = (Tootaja)this.TabTootajad.getSelectionModel().getSelectedItem();
+                tunnid = ((Tootaja)this.TabTootajad.getSelectionModel().getSelectedItem()).getTund();
+                this.taidaTunnid(tunnid);
             }
 
         });
@@ -59,6 +130,7 @@ public class vaataSisuController implements Initializable {
 
         });
     }
+
 
 
 
@@ -90,14 +162,28 @@ public class vaataSisuController implements Initializable {
         return valitud;
     }
 
-    @FXML
     public void taidaTabel() {
         Projekt valitud = this.valitudProjekt();
-        this.TabTooted.setItems(FXCollections.observableArrayList(valitud.getTooted()));
-        this.TabTootajad.setItems(FXCollections.observableArrayList(valitud.getTootajad()));
-        this.TabLogid.setItems(FXCollections.observableArrayList(valitud.getLogid()));
+        taidaTooted(valitud.getTooted());
+        taidaTootajad(valitud.getTootajad());
+        taidaLogid(valitud.getLogid());
+    }
+
+    @FXML
+    public void taidaTooted(List<Toode> tooted){
+        this.TabTooted.setItems(FXCollections.observableArrayList(tooted));
         this.TabTooted.refresh();
+    }
+
+    @FXML
+    public void taidaTootajad(List<Tootaja> tootajad){
+        this.TabTootajad.setItems(FXCollections.observableArrayList(tootajad));
         this.TabTootajad.refresh();
+    }
+
+    @FXML
+    public void taidaLogid(List<Logi> logid){
+        this.TabLogid.setItems(FXCollections.observableArrayList(logid));
         this.TabLogid.refresh();
     }
 
@@ -109,7 +195,7 @@ public class vaataSisuController implements Initializable {
 
     private void kuvaLogi(String[] logi) {
         Dialoog kuva = new Dialoog(Alert.AlertType.INFORMATION);
-        kuva.MakeDialog(Alert.AlertType.INFORMATION, "Logi", "Logi esitatud: " + logi[1], logi[0]);
+        kuva.MakeDialog("Logi", "Logi esitatud: " + logi[1], logi[0]);
     }
 }
 

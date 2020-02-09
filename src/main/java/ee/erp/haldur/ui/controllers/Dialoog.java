@@ -9,8 +9,7 @@ public class Dialoog {
         this.alert = new Alert(tuup);
     }
 
-    public void MakeDialog(Alert.AlertType alertType, String title, String header, String message){
-        alert.setAlertType(alertType);
+    public void MakeDialog(String title, String header, String message){
         alert.setTitle(title);
         alert.setHeaderText(header);
         alert.setContentText(message);

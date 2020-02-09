@@ -1,5 +1,8 @@
 package ee.erp.haldur.Data;
 
+import ee.erp.haldur.ui.controllers.vaataSisuController;
+import javafx.scene.control.Button;
+
 public class Tund {
     private int tund;
     private String kuupaev;

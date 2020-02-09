@@ -50,6 +50,8 @@
                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                 </columnConstraints>
                                 <rowConstraints>
@@ -78,7 +80,7 @@
                                        <GridPane.margin>
                                           <Insets left="5.0" right="5.0" />
                                        </GridPane.margin></TextField>
-                                    <TextField fx:id="hindLText" promptText="Hind" GridPane.columnIndex="5">
+                                    <TextField fx:id="hindLText" promptText="Hind" GridPane.columnIndex="7">
                                        <GridPane.margin>
                                           <Insets left="5.0" right="5.0" />
                                        </GridPane.margin></TextField>
@@ -102,7 +104,7 @@
                                           <Insets left="5.0" right="5.0" />
                                        </GridPane.margin>
                                     </TextField>
-                                    <TextField fx:id="hindMText" promptText="Hind" GridPane.columnIndex="5" GridPane.rowIndex="1">
+                                    <TextField fx:id="hindMText" promptText="Hind" GridPane.columnIndex="7" GridPane.rowIndex="1">
                                        <GridPane.margin>
                                           <Insets left="5.0" right="5.0" />
                                        </GridPane.margin>
@@ -116,6 +118,26 @@
                                        <GridPane.margin>
                                           <Insets bottom="5.0" top="40.0" />
                                        </GridPane.margin></Button>
+                                    <TextField fx:id="makseTahtaegLText" promptText="Makse tähtaeg" GridPane.columnIndex="5">
+                                       <GridPane.margin>
+                                          <Insets left="5.0" right="5.0" />
+                                       </GridPane.margin>
+                                    </TextField>
+                                    <TextField fx:id="makstudLText" promptText="Makstud" GridPane.columnIndex="6">
+                                       <GridPane.margin>
+                                          <Insets left="5.0" right="5.0" />
+                                       </GridPane.margin>
+                                    </TextField>
+                                    <TextField fx:id="makseTahtaegMText" promptText="Makse tähtaeg" GridPane.columnIndex="5" GridPane.rowIndex="1">
+                                       <GridPane.margin>
+                                          <Insets left="5.0" right="5.0" />
+                                       </GridPane.margin>
+                                    </TextField>
+                                    <TextField fx:id="makstudMText" promptText="Makstud" GridPane.columnIndex="6" GridPane.rowIndex="1">
+                                       <GridPane.margin>
+                                          <Insets left="5.0" right="5.0" />
+                                       </GridPane.margin>
+                                    </TextField>
                                  </children>
                               </GridPane>
                            </children>

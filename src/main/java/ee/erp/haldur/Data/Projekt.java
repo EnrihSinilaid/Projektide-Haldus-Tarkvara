@@ -81,5 +81,6 @@ public class Projekt {
     public String toString() {
         return this.projektiNimi;
     }
+
 }
 

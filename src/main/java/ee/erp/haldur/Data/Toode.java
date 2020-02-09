@@ -5,13 +5,17 @@ public class Toode {
     private int kogus;
     private String kohal;
     private String saabumiseKuupaev;
+    private String makseTahtaeg;
+    private String makstud;
     private Double hind;
 
-    public Toode(String kood, int kogus, String kohal, String saabumiseKuupaev, Double hind) {
+    public Toode(String kood, int kogus, String kohal, String saabumiseKuupaev, String makseTahtaeg, String makstud, Double hind) {
         this.kood = kood;
         this.kogus = kogus;
         this.kohal = kohal;
         this.saabumiseKuupaev = saabumiseKuupaev;
+        this.makseTahtaeg = makseTahtaeg;
+        this.makstud = makstud;
         this.hind = hind;
     }
 
@@ -53,5 +57,21 @@ public class Toode {
 
     public void setHind(Double hind) {
         this.hind = hind;
+    }
+
+    public String getMakseTahtaeg() {
+        return makseTahtaeg;
+    }
+
+    public void setMakseTahtaeg(String makseTahtaeg) {
+        this.makseTahtaeg = makseTahtaeg;
+    }
+
+    public String getMakstud() {
+        return makstud;
+    }
+
+    public void setMakstud(String makstud) {
+        this.makstud = makstud;
     }
 }

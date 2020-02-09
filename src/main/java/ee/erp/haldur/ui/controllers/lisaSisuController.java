@@ -14,10 +14,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 
 public class lisaSisuController implements Initializable {
@@ -47,6 +44,10 @@ public class lisaSisuController implements Initializable {
     @FXML
     private TextField kohalLText;
     @FXML
+    private TextField makseTahtaegLText;
+    @FXML
+    private TextField makstudLText;
+    @FXML
     private TextField hindLText;
     @FXML
     private TextField tooteKoodMText;
@@ -56,6 +57,10 @@ public class lisaSisuController implements Initializable {
     private TextField saabumineMText;
     @FXML
     private TextField kohalMText;
+    @FXML
+    private TextField makseTahtaegMText;
+    @FXML
+    private TextField makstudMText;
     @FXML
     private TextField hindMText;
     @FXML
@@ -75,6 +80,7 @@ public class lisaSisuController implements Initializable {
         this.valiProjektCombo.showingProperty().addListener((observable, wasShowing, isNowShowing) -> {
             this.populeeriProjektid();
         });
+
         this.valiTootajaCombo.showingProperty().addListener((observable, wasShowing, isNowShowing) -> {
             this.populeeriTootajad();
         });
@@ -178,32 +184,48 @@ public class lisaSisuController implements Initializable {
         this.kogusMText.setText(String.valueOf(valitud.getKogus()));
         this.saabumineMText.setText(valitud.getSaabumiseKuupaev());
         this.kohalMText.setText(valitud.getKohal());
+        this.makseTahtaegMText.setText(valitud.getMakseTahtaeg());
+        this.makstudMText.setText(valitud.getMakstud());
         this.hindMText.setText(String.valueOf(valitud.getHind()));
     }
 
     @FXML
     public void lisaTootajaButtonClicked() {
-        Projekt valitud = this.valitudProjekt();
-        valitud.addTootaja(new Tootaja(this.tootajaNimiText.getText()));
-        this.tootajaNimiText.setText("");
+        if(valitudProjekt() != null) {
 
-        try {
-            this.dao.salvesta();
-        } catch (IOException var3) {
-            var3.printStackTrace();
+            Projekt valitud = this.valitudProjekt();
+            if(!this.tootajaNimiText.getText().replace(" ", "").isEmpty()) {
+                valitud.addTootaja(new Tootaja(this.tootajaNimiText.getText()));
+                this.tootajaNimiText.setText("");
+
+                try {
+                    this.dao.salvesta();
+                } catch (IOException var3) {
+                    var3.printStackTrace();
+                }
+            }
+            else{
+                Dialoog alert = new Dialoog(Alert.AlertType.ERROR);
+                alert.MakeDialog("Veateade!", "Viga tootaja lisamisel!", "Viga esines, sest sisestatud nimi puudus. Sisestage korrektne nimi ja proovige uuesti.");
+            }
         }
-
+        else{
+            Dialoog alert = new Dialoog(Alert.AlertType.ERROR);
+            alert.MakeDialog("Veateade!", "Viga tootaja lisamisel!", "Viga esines, sest projekt on valimata. Valige projekt ja proovige uuest.");
+        }
     }
 
     @FXML
     public void lisaToodeButtonClicked() {
         Projekt valitud = this.valitudProjekt();
-        valitud.addToode(new Toode(this.tooteKoodLText.getText(), Integer.parseInt(this.kogusLText.getText()), this.kohalLText.getText(), this.saabumineLText.getText(), Double.parseDouble(this.hindLText.getText())));
-        this.tooteKoodLText.setText("");
-        this.kogusLText.setText("");
-        this.saabumineLText.setText("");
-        this.kohalLText.setText("");
-        this.hindLText.setText("");
+        valitud.addToode(new Toode(this.tooteKoodLText.getText(), Integer.parseInt(this.kogusLText.getText())
+                                    , this.kohalLText.getText()
+                                    , this.saabumineLText.getText()
+                                    , this.makseTahtaegLText.getText()
+                                    , this.makstudLText.getText()
+                                    , Double.parseDouble(this.hindLText.getText())));
+
+        lisaToodetValjadReset();
 
         try {
             this.dao.salvesta();
@@ -215,25 +237,48 @@ public class lisaSisuController implements Initializable {
 
     @FXML
     public void muudaToodeButtonClicked() {
-        Toode valitudToode = this.valitudToode();
-        valitudToode.setKood(this.tooteKoodMText.getText());
-        valitudToode.setKogus(Integer.parseInt(this.kogusMText.getText()));
-        valitudToode.setSaabumiseKuupaev(this.saabumineMText.getText());
-        valitudToode.setKohal(this.kohalMText.getText());
-        valitudToode.setHind(Double.parseDouble(this.hindMText.getText()));
+        if(valitudToode() != null) {
+            Toode valitudToode = this.valitudToode();
+            valitudToode.setKood(this.tooteKoodMText.getText());
+            valitudToode.setKogus(Integer.parseInt(this.kogusMText.getText()));
+            valitudToode.setSaabumiseKuupaev(this.saabumineMText.getText());
+            valitudToode.setKohal(this.kohalMText.getText());
+            valitudToode.setHind(Double.parseDouble(this.hindMText.getText()));
+            muudaToodetValjadReset();
+            try {
+                this.dao.salvesta();
+            } catch (IOException var3) {
+                var3.printStackTrace();
+            }
+        }
+        else{
+            Dialoog alert = new Dialoog(Alert.AlertType.ERROR);
+            alert.MakeDialog("Veateade!", "Viga toote muutmisel", "Viga esines, sest toode on valimata. Valige toode ja proovige uuest.");
+        }
+    }
+
+    @FXML
+    public void muudaToodetValjadReset(){
         this.tooteKoodMText.setText("");
         this.kogusMText.setText("");
         this.saabumineMText.setText("");
         this.kohalMText.setText("");
+        this.makseTahtaegMText.setText("");
+        this.makstudMText.setText("");
         this.hindMText.setText("");
-
-        try {
-            this.dao.salvesta();
-        } catch (IOException var3) {
-            var3.printStackTrace();
-        }
-
     }
+
+    @FXML
+    public void lisaToodetValjadReset(){
+        this.tooteKoodLText.setText("");
+        this.kogusLText.setText("");
+        this.saabumineLText.setText("");
+        this.kohalLText.setText("");
+        this.makseTahtaegLText.setText("");
+        this.makstudLText.setText("");
+        this.hindLText.setText("");
+    }
+
 
     @FXML
     public void lisaTunnidButtonClicked() {

@@ -12,7 +12,7 @@
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <GridPane prefHeight="57.0" prefWidth="798.0" styleClass="grid" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <GridPane prefHeight="57.0" prefWidth="798.0" styleClass="grid2" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
@@ -44,29 +44,39 @@
                     <items>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                            <children>
-                              <TableView fx:id="TabTooted" layoutX="75.0" prefHeight="157.0" prefWidth="796.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <TableView fx:id="TabTooted" layoutX="75.0" prefHeight="157.0" prefWidth="796.0" styleClass=".table-view" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                 <columns>
-                                  <TableColumn fx:id="TKood" prefWidth="165.0" text="Toote kood">
+                                  <TableColumn fx:id="TKood" prefWidth="132.0" text="Toote kood">
                                     <cellValueFactory>
                                         <PropertyValueFactory property="kood" />
                                     </cellValueFactory>
                                     </TableColumn>
-                                  <TableColumn fx:id="TKogus" minWidth="8.0" prefWidth="75.0" text="Kogus">
+                                  <TableColumn fx:id="TKogus" minWidth="8.0" prefWidth="95.0" text="Kogus">
                                     <cellValueFactory>
                                         <PropertyValueFactory property="kogus" />
                                     </cellValueFactory>
                                   </TableColumn>
-                                    <TableColumn fx:id="TSaabAeg" minWidth="0.0" prefWidth="229.0" text="Oodatav saabumisaeg">
+                                    <TableColumn fx:id="TSaabAeg" minWidth="0.0" prefWidth="162.0" text="Oodatav saabumisaeg">
                                         <cellValueFactory>
                                             <PropertyValueFactory property="saabumiseKuupaev" />
                                         </cellValueFactory>
                                     </TableColumn>
-                                    <TableColumn fx:id="TKohal" prefWidth="195.0" text="Kohal">
+                                    <TableColumn fx:id="TKohal" prefWidth="84.0" text="Kohal">
                                         <cellValueFactory>
                                             <PropertyValueFactory property="kohal" />
                                         </cellValueFactory>
                                     </TableColumn>
-                                    <TableColumn fx:id="THind" prefWidth="131.0" text="Hind">
+                                    <TableColumn fx:id="TMTahtaeg" prefWidth="145.0" text="Makse tähtaeg">
+                                        <cellValueFactory>
+                                            <PropertyValueFactory property="makseTahtaeg" />
+                                        </cellValueFactory>
+                                    </TableColumn>
+                                    <TableColumn fx:id="TMakstud" prefWidth="96.0" text="Makstud">
+                                        <cellValueFactory>
+                                            <PropertyValueFactory property="makstud" />
+                                        </cellValueFactory>
+                                    </TableColumn>
+                                    <TableColumn fx:id="THind" prefWidth="81.0" text="Hind">
                                         <cellValueFactory>
                                             <PropertyValueFactory property="hind" />
                                         </cellValueFactory>
@@ -76,68 +86,69 @@
                            </children></AnchorPane>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                            <children>
-                              <SplitPane dividerPositions="0.3" orientation="VERTICAL" prefHeight="370.0" prefWidth="796.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="370.0" prefWidth="796.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                 <items>
                                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                        <children>
-                                          <TableView fx:id="TabTootajad" layoutX="-12.0" layoutY="-9.0" prefHeight="181.0" prefWidth="794.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                            <columns>
-                                              <TableColumn fx:id="TTootajad" prefWidth="638.0" text="Töötajad">
-                                                  <cellValueFactory>
-                                                      <PropertyValueFactory property="nimi" />
-                                                  </cellValueFactory>
-                                              </TableColumn>
-                                                <TableColumn fx:id="TTunnidKokku" prefWidth="155.0" text="Töötunnid kokku" >
-                                                    <cellValueFactory>
-                                                        <PropertyValueFactory property="kokku" />
-                                                    </cellValueFactory>
-                                                </TableColumn>
-                                            </columns>
-                                          </TableView>
-                                       </children>
-                                    </AnchorPane>
-                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                                       <children>
-                                          <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="181.0" prefWidth="794.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <SplitPane dividerPositions="0.4" prefHeight="107.0" prefWidth="794.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                             <items>
-                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                                    <children>
-                                                      <TableView fx:id="TabTunnid" prefHeight="87.0" prefWidth="792.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                      <TableView fx:id="TabTootajad" prefHeight="105.0" prefWidth="393.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                         <columns>
-                                                          <TableColumn fx:id="TTunnid" prefWidth="418.0" text="Töötunnid">
+                                                          <TableColumn fx:id="TTootajad" prefWidth="202.0" text="Töötajad">
                                                               <cellValueFactory>
-                                                                  <PropertyValueFactory property="tund" />
+                                                                  <PropertyValueFactory property="nimi" />
                                                               </cellValueFactory>
                                                           </TableColumn>
-                                                          <TableColumn fx:id="TTooKuupäev" minWidth="0.0" prefWidth="373.0" text="Töö kuupäev">
-                                                              <cellValueFactory>
-                                                                  <PropertyValueFactory property="kuupaev" />
-                                                              </cellValueFactory>
-                                                          </TableColumn>
+                                                            <TableColumn fx:id="TTunnidKokku" prefWidth="111.0" text="Töötunnid kokku">
+                                                                <cellValueFactory>
+                                                                    <PropertyValueFactory property="kokku" />
+                                                                </cellValueFactory>
+                                                            </TableColumn>
                                                         </columns>
                                                       </TableView>
                                                    </children>
                                                 </AnchorPane>
-                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                                    <children>
-                                                      <TableView fx:id="TabLogid" prefHeight="181.0" prefWidth="794.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                      <TableView fx:id="TabTunnid" prefHeight="105.0" prefWidth="472.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                         <columns>
-                                                          <TableColumn fx:id="TLogi" prefWidth="560.0" text="Logi">
-                                                              <cellValueFactory>
-                                                                  <PropertyValueFactory property="logi" />
-                                                              </cellValueFactory>
-                                                          </TableColumn>
-                                                          <TableColumn fx:id="TLogiKuupäev" minWidth="0.0" prefWidth="231.0" text="Logi kuupäev">
+                                                          <TableColumn fx:id="TTooKuupäev" prefWidth="234.0" text="Töö kuupäev">
                                                               <cellValueFactory>
                                                                   <PropertyValueFactory property="kuupaev" />
                                                               </cellValueFactory>
                                                           </TableColumn>
+                                                          <TableColumn fx:id="TTunnid" minWidth="0.0" prefWidth="151.0" text="Töötunnid">
+                                                              <cellValueFactory>
+                                                                  <PropertyValueFactory property="tund" />
+                                                              </cellValueFactory>
+                                                          </TableColumn>
+                                                            <TableColumn fx:id="TEemalda" minWidth="0.0" prefWidth="87.0" text="Eemalda">
+                                                            </TableColumn>
                                                         </columns>
                                                       </TableView>
                                                    </children>
                                                 </AnchorPane>
                                             </items>
                                           </SplitPane>
+                                       </children></AnchorPane>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                       <children>
+                                          <TableView fx:id="TabLogid" prefHeight="181.0" prefWidth="794.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <columns>
+                                              <TableColumn fx:id="TLogi" prefWidth="560.0" text="Logi">
+                                                  <cellValueFactory>
+                                                      <PropertyValueFactory property="logi" />
+                                                  </cellValueFactory>
+                                              </TableColumn>
+                                              <TableColumn fx:id="TLogiKuupäev" minWidth="0.0" prefWidth="231.0" text="Logi kuupäev">
+                                                  <cellValueFactory>
+                                                      <PropertyValueFactory property="kuupaev" />
+                                                  </cellValueFactory>
+                                              </TableColumn>
+                                            </columns>
+                                          </TableView>
                                        </children>
                                     </AnchorPane>
                                 </items>

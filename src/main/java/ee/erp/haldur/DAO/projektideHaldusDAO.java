@@ -23,10 +23,6 @@ public class projektideHaldusDAO {
     public projektideHaldusDAO() {
     }
 
-    private List<Projekt> tagastaProjektid() {
-        return this.projektid;
-    }
-
     public List<Projekt> getProjektid() {
         return this.projektid;
     }
@@ -53,6 +49,8 @@ public class projektideHaldusDAO {
                 toode.put("Kogus", String.valueOf(jupp.getKogus()));
                 toode.put("Kuupaev", jupp.getSaabumiseKuupaev());
                 toode.put("Kohal", jupp.getKohal());
+                toode.put("Makse tahtaeg", jupp.getMakseTahtaeg());
+                toode.put("Makstud", jupp.getMakstud());
                 toode.put("Hind", String.valueOf(jupp.getHind()));
                 tooted.put(String.valueOf(tooteLoendur++), toode);
             }
@@ -124,6 +122,7 @@ public class projektideHaldusDAO {
                     JSONObject toode = (JSONObject)tooted.get(String.valueOf(j));
                     Toode lisa = new Toode(toode.get("Kood").toString(), Integer.parseInt(toode.get("Kogus").toString())
                             , toode.get("Kuupaev").toString(), toode.get("Kohal").toString()
+                            , toode.get("Makse tahtaeg").toString(), toode.get("Makstud").toString()
                             , Double.parseDouble(toode.get("Hind").toString()));
                     uusTooted.add(lisa);
                 }

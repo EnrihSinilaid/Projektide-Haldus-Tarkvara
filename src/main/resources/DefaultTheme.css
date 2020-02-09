@@ -10,6 +10,12 @@
 
 .grid{
     -fx-control-inner-background: #648aad;
+    -fx-background-color: lightgray;
+    -fx-table-cell-border-color: #648aad;
+}
+
+.grid2{
+    -fx-control-inner-background: #648aad;
     -fx-background-color: #648aad;
     -fx-table-cell-border-color: #648aad;
 
@@ -61,6 +67,13 @@
 	-fx-text-fill: main_text_color
 }
 
+.text-area .content{
+    -fx-border-color: title_color;
+    -fx-background-color: white;
+    -fx-background-radius: 0;
+    -fx-text-fill: main_text_color
+}
+
 .choice-box{
     -fx-min-width: 119;
     -fx-background-color: white;
@@ -83,7 +96,7 @@
 }
 
 .text-field:focused{
-	-fx-background-color: b_color;
+    -fx-border-color: sb_color;
 	-fx-background-radius: 0;
 }
 
@@ -106,64 +119,56 @@
    -fx-pref-width: 1
 }
 
-/*
- * TableView
- */
-
- .table-view {
-    -fx-base: #ffbacb;
-    -fx-control-inner-background: control_color;
-    -fx-background-color: sb_color;
-    -fx-table-cell-border-color: sb_color;
+.table-view {
+    -fx-control-inner-background: #ffff;
+    -fx-background-color: #ffff;
+    -fx-table-cell-border-color: #ffff;
     -fx-table-header-border-color: transparent;
     -fx-padding: 0;
 }
 
- .table-row-cell .table-cell {
- 	-fx-border-width: 0px;
- }
+.table-row-cell .table-cell {
+    -fx-border-width: 0px;
+}
 
 .table-view .column-header-background {
-    -fx-background-color: control_color;
+    -fx-background-color: lightgrey;
 }
 
 .table-row-cell:empty {
-	-fx-background-color: sb_color;
+    -fx-background-color: #ffff;
 }
 
 .table-row-cell:selected {
-	-fx-background-color: control_color;
+    -fx-background-color: pink;
 }
 
 .table-view .column-header, .table-view .filler {
     -fx-size: 35;
     -fx-border-width: 2 2 2 2;
     -fx-background-color: transparent;
-    -fx-border-color:
-        title_color
-        title_color
-        title_color
-        title_color;
+    -fx-border-color: title_color title_color title_color title_color;
     -fx-border-insets: 1 1 1 1;
 }
 
 .table-view .column-header .label {
-    -fx-text-fill: main_text_color;
+    -fx-text-fill: black;
     -fx-alignment: center-left;
+    -fx-font-weight:bold;
+    -fx-font-size:17px;
 }
 
-.table-view:focused .table-row-cell:filled:focused:selected {
-    -fx-background-color: -fx-focus-color;
-}
+
 
 .table-view .placeholder {
-	-fx-background-color: sb_color;
+    -fx-background-color: #ffff;
 }
 
 .table-row-cell .text {
-       -fx-fill: main_text_color ;
+    -fx-fill: black;
+    -fx-font-weight:bold;
+    -fx-font-size:15px;
 }
-
 /*
  *
  * TabPane
@@ -711,7 +716,7 @@
  ******************************************************************************/
 
 .combo-box-base  {
-    -fx-background-color: transparent, #e2e2e2, transparent, control_color;
+    -fx-background-color: transparent, #e2e2e2, transparent, gray;
     -fx-background-radius: 0, 0, 0, 0;
     -fx-padding: 0.166667em; /* 2 */
 }
@@ -737,7 +742,7 @@
 
 /* ------- OPEN BUTTON ------- */
 .combo-box-base .arrow-button {
-    -fx-background-color: transparent, transparent, control_color;
+    -fx-background-color: transparent, transparent, lightgray;
 }
 
 /* ------- ARROW* ------- */
